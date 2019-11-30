@@ -9,3 +9,8 @@ C project
        make all
        ./main
   ```
+## Login Credentials:
+```bash
+    username - username
+    password - password
+```
