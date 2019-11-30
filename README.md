@@ -1,4 +1,11 @@
 # Hostel-Management-System
 C project
 
-Write your ideas to the ideas file, about what functionalities we can include in this project.
+## To run this program:
+  Open command terminal.
+  
+  Change to the Hostel-Management-System directory and enter the following commands.
+  ```bash
+       make all
+       ./main
+  ```
