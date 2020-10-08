@@ -15,15 +15,15 @@ char *mystrlwr(char *string)	//Function to Handle the case of "Case Sensitivity"
 //Function To Search By Name ("It gives the Result Based on Keywords Also")
 void searchByName(char*string)
 {
-	int count=0;
+	char *s = malloc(1000*sizeof(char));
 	struct student *temp=head;
-	char *s = malloc(100*sizeof(char));
+	int count=0;
 	while(temp!=NULL)
 	{
 		strcpy(s,temp->name);
 		if(strncmp(mystrlwr(s),mystrlwr(string),strlen(string))==0)
         {
-			count = 1;                        
+			                        
 			printf("NAME : %s\n",temp->name);
             printf("DATE OF BIRTH : %s\n",temp->DOB);
 			printf("ROLL NUMBER : %d\n",temp->rollnumber);
@@ -41,7 +41,8 @@ void searchByName(char*string)
 			printf("CONTACT : %s\n",temp->contact);
 			printf("EMAIL : %s\n",temp->email);
             printf("\n");
-        }
+                count = 1;
+	}
 		temp=temp->next;
 	}
 	if(count==0)
@@ -80,7 +81,7 @@ void searchByBatch(int n)
         }
         temp=temp->next;
     }   
-    if(count==0)
+    if(!count)
 		printf("No Records Found\n"); 
 }
 
@@ -89,9 +90,9 @@ void searchByRoom(int n)
 {
     struct student *temp=head;
     int count = 0;
-    while(temp!=0)
+    while(temp)
     {
-    	if(temp->roomnumber==n)
+    	if(temp->roomnumber-n==0)
         {
             count = 1;
             printf("NAME : %s\n",temp->name);
@@ -114,7 +115,7 @@ void searchByRoom(int n)
         }
         temp=temp->next;
     }
-    if(count==0)
+    if(!count)
 		printf("No Records Found\n");
 }
 
@@ -133,26 +134,30 @@ void search()
 
 		switch(choice){
 
-			case 1:	printf("Enter the Name or Keyword: ");
+			
+			case 0: 
+				break;	
+			case 3: 
+				int room;
+				printf("Enter the Room Number : ");
+				scanf("%d",&room);
+				searchByRoom(room);
+				break;
+				
+			case 1:	
 				char name[100];
+				printf("Enter the Name or Keyword: ");
 				scanf("\n%[^\n]s",name);
 				searchByName(name);
 				break;
 
-			case 2: printf("Enter Batch(1,2,3,4) : ");
+			case 2: 
 				int batch;
+				printf("Enter Batch(1,2,3,4) : ");
 				scanf("%d",&batch);
 				searchByBatch(batch);
 				break;
-
-			case 3: printf("Enter the Room Number : ");
-				int room;
-				scanf("%d",&room);
-				searchByRoom(room);
-				break;
-			case 0: 
-				break;
-
+				
 			default: printf("Invalid Response!\n");
 					search();
 					break;
@@ -161,7 +166,7 @@ void search()
 	}
 	else
 	{
-		printf("\n\nNO RECORDS FOUND!!\n\n");
+		printf("\n\nSORRY NO RECORDS WERE FOUND TRY AGAIN!!\n\n");
 	}
 }
 
